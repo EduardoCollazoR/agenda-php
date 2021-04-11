@@ -1,0 +1,106 @@
+/* custom properties */
+
+:root {
+    --color-fondo: #e0ece4;
+    --color-secundario: #d8d3cd;
+    --color-fondo-oscuro: #797a7e;
+    --fuente-primaria: 'Montserrat', sans-serif;
+    --fuente-secundaria: 'Lato', sans-serif;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--color-fondo);
+    font-family: var(--fuente-primaria);
+}
+
+h1, h2 {
+    font-family: var(--fuente-secundaria);
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    padding: 20px;
+    color: #fff;
+}
+
+.contenedor-barra {
+    background-color: var(--color-fondo-oscuro);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.6);
+}
+
+.contenedor {
+    max-width: 1100px;
+    margin: 1rem auto;
+}
+
+.sombra {
+    box-shadow: 0px 3px 3px 0px rgba(121, 122, 126, 1);
+}
+
+.bg-primario {
+    background-color: var(--color-secundario);
+    border-radius: 4px;
+}
+
+/* formulario */
+
+form {
+    padding: 3rem;
+    margin-top: 2rem;
+}
+
+form legend {
+    font-family: var(--fuente-secundaria);
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+    display: block;
+}
+
+legend span {
+    font-size: 1rem;
+    margin-top: 1rem;
+    clear: both;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.campo {
+    padding: .5rem 0;
+}
+
+.campo label {
+    font-size: 1.2rem;
+}
+
+.campo input[type="text"], .campo input[type="tel"] {
+    width: 100%;
+    border: none;
+    padding: .5rem;
+    height: 3rem;
+    margin-top: .5rem;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* responsive */
+
+@media (min-width: 768px) {
+    .campos {
+        display: flex;
+        justify-content: space-between;
+    }
+    .campo {
+        flex: 0 0 calc(33.3% - 1rem);
+    }
+}
