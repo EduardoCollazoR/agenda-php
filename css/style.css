@@ -1,9 +1,10 @@
 /* custom properties */
 
 :root {
-    --color-fondo: #e0ece4;
-    --color-secundario: #d8d3cd;
-    --color-fondo-oscuro: #797a7e;
+    --color-fondo: #e6d5b8;
+    --color-secundario: #f0a500;
+    --color-fondo-claro: #e45826;
+    --color-fondo-oscuro: #4a3933;
     --fuente-primaria: 'Montserrat', sans-serif;
     --fuente-secundaria: 'Lato', sans-serif;
 }
@@ -30,25 +31,97 @@ h1, h2 {
 h1 {
     padding: 20px;
     color: #fff;
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--color-secundario);
 }
 
 .contenedor-barra {
     background-color: var(--color-fondo-oscuro);
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 6px -6px #777;
 }
 
 .contenedor {
     max-width: 1100px;
-    margin: 1rem auto;
+    margin: 0 auto;
+}
+
+.barra {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+}
+
+.btn {
+    font-size: 2rem;
+    text-decoration: none;
+    border: none;
+}
+
+/* botones */
+
+.btn-editar {
+    color: var(--color-secundario);
+}
+
+.btn-borrar {
+    color: var(--color-fondo-claro);
+}
+
+.btn-borrar:hover {
+    cursor: pointer;
+}
+
+.volver {
+    background-color: var(--color-secundario);
+    border-radius: 10px;
+    text-align: center;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: .5rem;
+    box-shadow: 0 6px 6px -6px #000;
+    transition: background-color .5s ease-in-out;
+}
+
+.volver:hover {
+    background-color: var(--color-fondo-claro);
 }
 
 .sombra {
-    box-shadow: 0px 3px 3px 0px rgba(121, 122, 126, 1);
+    position: relative;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.sombra:before, .sombra:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    border-radius: 100px / 10px;
+}
+
+.sombra:after {
+    right: 10px;
+    left: auto;
+    transform: skew(8deg) rotate(3deg);
 }
 
 .bg-primario {
+    border-radius: 10px;
     background-color: var(--color-secundario);
-    border-radius: 4px;
+}
+
+.bg-blanco {
+    background-color: #fff;
+    border-radius: 10px;
 }
 
 /* formulario */
@@ -64,6 +137,7 @@ form legend {
     text-align: center;
     margin: 0;
     display: block;
+    color: var(--color-fondo-oscuro);
 }
 
 legend span {
@@ -89,8 +163,129 @@ legend span {
     height: 3rem;
     margin-top: .5rem;
     font-size: 1.2rem;
-    border-radius: 4px;
     outline: none;
+    border-radius: 10px;
+}
+
+.enviar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.campo input[type="submit"] {
+    background-color: var(--color-fondo-claro);
+    border: none;
+    color: #fff;
+    padding: 1rem 4rem;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    transition: background-color.5s ease-in-out;
+    flex: 1;
+    border-radius: 10px;
+    box-shadow: 0 6px 6px -6px #000;
+    outline: none;
+}
+
+.campo input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: var(--color-fondo-oscuro);
+}
+
+/* listado contactos */
+
+.contactos {
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.contenedor-contactos {
+    max-width: 800px;
+    margin: 4rem auto 0 auto;
+}
+
+.buscador {
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+    border: 1px solid var(--color-fondo);
+    outline: none;
+    margin: 2rem 0;
+    border-radius: 10px;
+}
+
+.total-contactos {
+    font-family: var(--fuente-secundaria);
+    margin: 2rem 0;
+    text-align: center;
+    color: var(--color-fondo-oscuro);
+    font-size: 2rem;
+}
+
+.total-contactos span {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.contenedor-tabla {
+    overflow: scroll;
+}
+
+.listado-contactos {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+}
+
+.listado-contactos thead {
+    background-color: var(--color-fondo-claro);
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.listado-contactos thead th {
+    padding: 1rem 0;
+}
+
+.listado-contactos tbody td {
+    padding: .5rem;
+}
+
+.listado-contactos tbody td:nth-child(4) {
+    text-align: center;
+}
+
+.listado-contactos button {
+    background-color: transparent !important;
+    border: none;
+}
+
+/* notificaciones */
+
+.notificacion {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    opacity: 0;
+    box-shadow: 0 6px 6px -6px #000;
+    transition: opacity .5s ease;
+}
+
+.visible {
+    opacity: 1;
+}
+
+/* colores notificacion */
+
+.correcto {
+    background-color: rgb(153, 204, 51);
+    color: green;
+}
+
+.error {
+    background-color: rgb(255, 153, 102);
+    color: red;
 }
 
 /* responsive */
@@ -102,5 +297,8 @@ legend span {
     }
     .campo {
         flex: 0 0 calc(33.3% - 1rem);
+    }
+    .campo input[type="submit"] {
+        flex: 0 0 auto;
     }
 }
