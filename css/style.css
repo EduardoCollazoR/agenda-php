@@ -69,6 +69,7 @@ h2 {
 
 .btn-borrar {
     color: var(--color-fondo-claro);
+    outline: none;
 }
 
 .btn-borrar:hover {
