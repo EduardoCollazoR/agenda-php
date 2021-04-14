@@ -9,7 +9,10 @@ function eventListener() {
   formularioContactos.addEventListener('submit', leerFormulario);
 
   //listener para eliminar boton
-  listadoContactos.addEventListener('click', eliminarContacto);
+  if (listadoContactos) {
+    listadoContactos.addEventListener('click', eliminarContacto);
+  }
+
 
 }
 
@@ -38,6 +41,10 @@ function leerFormulario(e) {
 
     } else {
       //editar contacto
+      //leer id
+      const idRegistro = document.querySelector('#id').value;
+      infoContacto.append('id', idRegistro);
+      actualizarRegistro(infoContacto);
     }
 
   }
@@ -113,6 +120,32 @@ function insertarBD(datos) {
 
 }
 
+function actualizarRegistro(datos) {
+  //crear objeto
+  const xhr = new XMLHttpRequest();
+  //abrir conexion
+  xhr.open('POST', 'includes/modelos/modelo-contacto.php', true);
+  //leer la respuesta 
+  xhr.onload = function() {
+    if (this.status === 200) {
+      const respuesta = JSON.parse(xhr.responseText);
+
+      if (respuesta.respuesta === 'correcto') {
+        //mostrar notificacion
+        mostrarNotificacion('Contacto Editado Correctamente', 'correcto');
+      } else {
+        mostrarNotificacion('Hubo un error...', 'error');
+      }
+      //despues de 3 segundos redireccionar
+      setTimeout(() => {
+        window.location.href = 'index.php';
+      }, 4000);
+    }
+  }
+  //enviar la peticion
+  xhr.send(datos);
+
+}
 
 function eliminarContacto(e) {
   if (e.target.parentElement.classList.contains('btn-borrar')) {

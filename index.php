@@ -8,7 +8,7 @@ include 'includes/layout/header.php'
 </div>
 
 <div class="bg-primario contenedor sombra">
-    <form id="contacto" action="#">
+    <form id="contacto">
         <legend>Añada un contacto <span>Todos los campos son obligatorios</span></legend>
         <?php include 'includes/layout/formulario.php' ?>
     </form>
