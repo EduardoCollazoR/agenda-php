@@ -1,5 +1,6 @@
 const formularioContactos = document.querySelector('#contacto'),
-  listadoContactos = document.querySelector('#listado-contactos tbody');
+  listadoContactos = document.querySelector('#listado-contactos tbody'),
+  inputBuscador = document.querySelector('#buscar');
 
 eventListener();
 
@@ -13,6 +14,10 @@ function eventListener() {
     listadoContactos.addEventListener('click', eliminarContacto);
   }
 
+  //inputBuscador
+  inputBuscador.addEventListener('input', buscarContactos);
+
+  numeroContactos();
 
 }
 
@@ -112,6 +117,9 @@ function insertarBD(datos) {
 
       //mostrar notificacion
       mostrarNotificacion('Contacto Creado Correctamente', 'correcto');
+
+      //actualizar numero 
+      numeroContactos();
     }
   }
 
@@ -169,6 +177,8 @@ function eliminarContacto(e) {
             e.target.parentElement.parentElement.parentElement.remove();
             //mostrar notificacion
             mostrarNotificacion('Contacto Eliminado', 'correcto');
+            //actualizar numero 
+            numeroContactos();
           } else {
             //mostrar notificacion
             mostrarNotificacion('Hubo un error...', 'error');
@@ -199,4 +209,38 @@ function mostrarNotificacion(mensaje, clase) {
       }, 500);
     }, 2000);
   }, 100);
+}
+
+
+// buscador de registros
+function buscarContactos(e) {
+
+  const expresion = new RegExp(e.target.value, "i");
+  registros = document.querySelectorAll('tbody tr');
+  registros.forEach(registro => {
+    registro.style.display = 'none';
+
+    if (registro.childNodes[1].textContent.replace(/\s/g, " ").search(expresion) != -1) {
+      registro.style.display = 'table-row';
+    }
+    numeroContactos();
+  })
+
+}
+
+//contador de contactos
+function numeroContactos() {
+
+  const totalContactos = document.querySelectorAll('tbody tr'),
+    contenedorNumero = document.querySelector('.total-contactos span');
+
+  let total = 0;
+  totalContactos.forEach(contacto => {
+    if (contacto.style.display === '' || contacto.style.display === 'table-row') {
+      total++;
+    }
+  });
+  contenedorNumero.textContent = total;
+
+
 }

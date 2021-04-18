@@ -11,7 +11,6 @@
         <label for="telefono">Telefono</label>
         <input type="tel" class="sombra" id="telefono" value="<?php echo (isset($contacto['telefono'])) ? $contacto['telefono'] : ''; ?>">
     </div>
-
 </div>
 <div class="campo enviar">
     <?php

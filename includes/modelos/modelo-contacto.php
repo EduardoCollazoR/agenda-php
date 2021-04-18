@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+
 if ($_POST) {
     if ($_POST['accion'] == 'crear') {
         //crear nuevo registro en bd 
@@ -28,45 +28,12 @@ if ($_POST) {
             }
             $stmt->close();
             $conn->close();
-        } catch (Throwable $e) {
-            $respuesta = array(
-                'error' => $e->getMessage()
-            );
-        }
-        echo json_encode($respuesta);
-    }
-}
-
-if ($_GET) {
-    if ($_GET['accion'] == 'borrar') {
-        require_once('../funciones/bd.php');
-        $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-
-        try {
-            $stmt = $conn->prepare("DELETE FROM contactos WHERE id_contacto=?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-
-            if ($stmt->affected_rows == 1) {
-                $respuesta = array(
-                    'respuesta' => 'correcto'
-                );
-            }
-
-            $stmt->close();
-            $conn->close();
         } catch (Exception $e) {
             $respuesta = array(
                 'error' => $e->getMessage()
             );
         }
-    }
-    echo json_encode($respuesta);
-}
-
-
-if ($_POST) {
-    if ($_POST['accion'] == 'editar') {
+    } elseif ($_POST['accion'] == 'editar') {
         require_once('../funciones/bd.php');
         //validar entradas 
         $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_STRING);
@@ -99,3 +66,66 @@ if ($_POST) {
     }
     echo json_encode($respuesta);
 }
+
+if ($_GET) {
+    if ($_GET['accion'] == 'borrar') {
+        require_once('../funciones/bd.php');
+        $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+
+        try {
+            $stmt = $conn->prepare("DELETE FROM contactos WHERE id_contacto=?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+
+            if ($stmt->affected_rows == 1) {
+                $respuesta = array(
+                    'respuesta' => 'correcto'
+                );
+            }
+
+            $stmt->close();
+            $conn->close();
+        } catch (Exception $e) {
+            $respuesta = array(
+                'error' => $e->getMessage()
+            );
+        }
+    }
+    echo json_encode($respuesta);
+}
+
+
+// if ($_POST) {
+//     if ($_POST['accion'] == 'editar') {
+//         require_once('../funciones/bd.php');
+//         //validar entradas 
+//         $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_STRING);
+//         $empresa = filter_var($_POST['empresa'], FILTER_SANITIZE_STRING);
+//         $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
+//         $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+
+//         try {
+
+//             $stmt = $conn->prepare("UPDATE contactos SET nombre=?, telefono=?, empresa=? WHERE id_contacto=?");
+//             $stmt->bind_param("sssi", $nombre, $telefono, $empresa, $id);
+//             $stmt->execute();
+//             if ($stmt->affected_rows == 1) {
+//                 $respuesta = array(
+//                     'respuesta' => 'correcto'
+//                 );
+//             } else {
+//                 $respuesta = array(
+//                     'respuesta' => 'error'
+
+//                 );
+//             }
+//             $stmt->close();
+//             $conn->close();
+//         } catch (Exception $e) {
+//             $respuesta = array(
+//                 'error' => $e->getMessage()
+//             );
+//         }
+//     }
+//     echo json_encode($respuesta);
+// }
